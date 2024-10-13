@@ -89,8 +89,12 @@ def imprimir_publicaciones_por_base_de_datos(base_datos):
     else:
         print(f"No se encontraron publicaciones para la base de datos '{base_datos}'.")
 
-if __name__ == '__main__':
+def unificar_publicaciones():
     ruta_data = '../../data/'
-    leer_archivos(ruta_data)
-    print("cantidad publicaciones filtradas: ", len(publicaciones_unificadas))
+    return leer_archivos(ruta_data)
+if __name__ == '__main__':
+    #ruta_data = '../../data/'
+    #leer_archivos(ruta_data)
+    publicaciones = unificar_publicaciones()
+    print("cantidad publicaciones filtradas: ", len(publicaciones))
     print("Cantidad publicaciones sin un posible identificador o repetidas", contador)
