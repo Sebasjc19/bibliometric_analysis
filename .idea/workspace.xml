@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c34b4920-f381-4fad-a4c3-6c3ed6f51ca0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/analysis/data_unification.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/publication.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/order_methods/timsort.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/data_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/binary_insertion_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/bitonic_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/bucket_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/comb_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/gnome_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/heap_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/pigeonhole_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/quick_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/radix_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/selection_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/tim_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods/tree_sort.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/analysis/order_methods_time_graphics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/bibtex_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/csv_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/graphics_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/print_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/sqlite_util.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/results/graphics.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/analysis/data_unification.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/analysis/data_unification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/publication.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/publication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/order_methods/timsort.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +41,7 @@
       <list>
         <option value="Dockerfile" />
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -50,31 +69,107 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.data_unification.executor": "Run",
-    "Python.graphics.executor": "Run",
-    "Python.timsort.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.SQLiteUtil.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binary_insertion_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bitonic_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bucket_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bucket_sort_copy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.comb_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.combsort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_unification.executor&quot;: &quot;Run&quot;,
+    &quot;Python.gnome_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.graphics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.heap_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.order_methods_time_graphics.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pigeonhole_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.quick_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.quick_sort_copy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.radix_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.selection_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.selectionsort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sqlite_util.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tim_sort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.timsort.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tree_sort.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sebastianjaramillocardona/PycharmProjects/analisis_de_datos_bibliometricos/data/taylorandfrancis&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/data/acm" />
-      <recent name="$PROJECT_DIR$/data/scopus" />
-      <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$/data/sage" />
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/data/taylorandfrancis" />
+      <recent name="$PROJECT_DIR$/src/order_methods" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utils" />
+      <recent name="$PROJECT_DIR$/src/analysis" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/results" />
+      <recent name="$PROJECT_DIR$/data/scopus" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.bucket_sort_copy">
+    <configuration name="bucket_sort_copy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bibliometric_analysis" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/order_methods" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/order_methods/bucket_sort_copy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="data_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="bibliometric_analysis" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/analysis" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/analysis/data_analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="data_unification" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="bibliometric_analysis" />
       <option name="ENV_FILES" value="" />
@@ -100,7 +195,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.data_analysis" />
         <item itemvalue="Python.data_unification" />
+        <item itemvalue="Python.bucket_sort_copy" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +219,19 @@
       <updated>1727653346141</updated>
       <workItem from="1727653347495" duration="10078000" />
       <workItem from="1728399842999" duration="29049000" />
-      <workItem from="1728853717291" duration="1018000" />
+      <workItem from="1728853717291" duration="26927000" />
+      <workItem from="1729130837269" duration="7124000" />
+      <workItem from="1729139396144" duration="13000" />
+      <workItem from="1729549543481" duration="786000" />
+      <workItem from="1729703822172" duration="5000" />
+      <workItem from="1730049199397" duration="8185000" />
+      <workItem from="1730081137180" duration="15000" />
+      <workItem from="1730081166621" duration="3497000" />
+      <workItem from="1730157592913" duration="382000" />
+      <workItem from="1730157981527" duration="10051000" />
+      <workItem from="1730213720537" duration="2244000" />
+      <workItem from="1731000099910" duration="3177000" />
+      <workItem from="1731118344516" duration="12000" />
     </task>
     <servers />
   </component>
@@ -130,7 +239,28 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/bibliometric_analysis$data_unification.coverage" NAME="data_unification Coverage Results" MODIFIED="1728500128272" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/analysis" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$pigeonhole_sort.coverage" NAME="pigeonhole_sort Coverage Results" MODIFIED="1729135487876" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$quick_sort.coverage" NAME="quick_sort Coverage Results" MODIFIED="1729136296029" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$data_analysis.coverage" NAME="data_analysis Coverage Results" MODIFIED="1731000775713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/analysis" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$combsort.coverage" NAME="combsort Coverage Results" MODIFIED="1728863905799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$tree_sort.coverage" NAME="tree_sort Coverage Results" MODIFIED="1729135240256" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$heap_sort.coverage" NAME="heap_sort Coverage Results" MODIFIED="1729136801019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$bitonic_sort.coverage" NAME="bitonic_sort Coverage Results" MODIFIED="1729549577759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$bucket_sort.coverage" NAME="bucket_sort Coverage Results" MODIFIED="1729136090488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$quick_sort_copy.coverage" NAME="quick_sort_copy Coverage Results" MODIFIED="1729136594751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$selection_sort.coverage" NAME="selection_sort Coverage Results" MODIFIED="1729134101450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$bucket_sort_copy.coverage" NAME="bucket_sort_copy Coverage Results" MODIFIED="1729549566747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$sqlite_util.coverage" NAME="sqlite_util Coverage Results" MODIFIED="1731001202083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/utils" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$selectionsort.coverage" NAME="selectionsort Coverage Results" MODIFIED="1728864442900" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$SQLiteUtil.coverage" NAME="SQLiteUtil Coverage Results" MODIFIED="1730082901731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/utils" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$binary_insertion_sort.coverage" NAME="binary_insertion_sort Coverage Results" MODIFIED="1729137319255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$radix_sort.coverage" NAME="radix_sort Coverage Results" MODIFIED="1729137556488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$tim_sort.coverage" NAME="tim_sort Coverage Results" MODIFIED="1729549951936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$order_methods_time_graphics.coverage" NAME="order_methods_time_graphics Coverage Results" MODIFIED="1729550041980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/analysis" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$data_unification.coverage" NAME="data_unification Coverage Results" MODIFIED="1731001715575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/analysis" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$gnome_sort.coverage" NAME="gnome_sort Coverage Results" MODIFIED="1729550035663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$comb_sort.coverage" NAME="comb_sort Coverage Results" MODIFIED="1729133846265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
+    <SUITE FILE_PATH="coverage/bibliometric_analysis$timsort.coverage" NAME="timsort Coverage Results" MODIFIED="1728863546320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/order_methods" />
     <SUITE FILE_PATH="coverage/bibliometric_analysis$graphics.coverage" NAME="graphics Coverage Results" MODIFIED="1728440825789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
   </component>
 </project>

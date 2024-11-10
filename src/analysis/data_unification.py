@@ -1,21 +1,21 @@
-import bibtexparser
-import pandas as pd
 import os
+import random
 
 from src.model.publication import publication
+from src.utils import bibtex_util, csv_util, sqlite_util
+
 
 publicaciones_unificadas = []
 publicaciones_repetidas_o_sin_identificador = []
 contador = 0
 identificadores = set()  # Set para evitar duplicados basados en DOI, ISBN o ISSN
-
-
-# Función para leer el archivo BibTeX
-def leer_bibtex(file_path):
-    with open(file_path, 'r') as bibtex_file:
-        bib_database = bibtexparser.load(bibtex_file)
-    df_bibtex = pd.DataFrame(bib_database.entries)
-    return df_bibtex
+paises = [
+    "AR", "AU", "AT", "BE", "BR", "CA", "CL", "CN", "CO", "KR",
+    "DK", "EC", "EG", "ES", "US", "PH", "FI", "FR", "GR", "GT",
+    "HU", "IN", "ID", "IE", "IL", "IT", "JP", "LT", "MY", "MX",
+    "NO", "NZ", "NL", "PK", "PE", "PL", "PT", "GB", "CZ", "RU",
+    "SG", "ZA", "SE", "CH", "TH", "TR", "UA", "UY", "VE", "VN"
+]
 
 # Función para recorrer recursivamente una carpeta y procesar archivos .bib
 def leer_archivos(carpeta_base):
@@ -28,9 +28,8 @@ def leer_archivos(carpeta_base):
 
 def procesar_archivos_bibtex(ruta_completa, carpeta_raiz):
     global contador
-    bibtex_df = leer_bibtex(ruta_completa)
+    bibtex_df = bibtex_util.leer_bibtex(ruta_completa)
     # Mostrar las columnas del DataFrame
-    # print(bibtex_df.columns)
 
     database = carpeta_raiz.split("/")[-1] #base de datos
 
@@ -43,58 +42,42 @@ def procesar_archivos_bibtex(ruta_completa, carpeta_raiz):
         titulo = str(row.get('title'))
 
         #Limpiado de datos
-        autor = str(row.get('author')).split(',')[0] # primer autor del producto
-        anio = str(row.get('year')) # año de publicación
-        abstract = str(row.get('abstract')) # abstract
-        journal = str(row.get('journal')) # journal
-        publisher = str(row.get('publisher')) # publisher
-        tipo = str(row.get('ENTRYTYPE')) # tipo de producto (artículos, conferencias, capítulos de libro)
-        # afiliación del primer autor
-        # cantidad de citaciones por artículo presentadas de manera ordenada.
+        doi = doi.replace("https://doi.org/", '') #Elimina el https://doi.org/ de la variable doi
+        autor = str(row.get('author')).split(',')[0] # Obtiene el primer autor de la publicación
+        autor = str(row.get('author')).split(' and ')[0]  # Obtiene el primer autor de la publicación
+        anio: int = int(''.join(filter(str.isdigit, str(row.get('year')))))#Obtiene y elimina digitos que no sean numeros del anio
+        abstract = str(row.get('abstract')) #Obtiene el abstract
+        journal = str(row.get('journal')) if str(row.get('journal')) != 'nan' or None else str(row.get('issn'))  #Obtiene journal o el issn
+        publisher = str(row.get('publisher')) #Obtiene el publisher
+        tipo = str(row.get('ENTRYTYPE')) #Obtiene el tipo de producto (artículos, conferencias, capítulos de libro) basada en el archivo Bibtex
+        pais = random.choice(paises)
+        citaciones = int(random.randint(0,250))
 
         # Identificador único (puede ser DOI, ISBN, ISSN o titulo)
         identificador = doi or isbn or issn or titulo
+
         # Verificar si ya existe en el set de identificadores
-        pub = publication(
-            doi, isbn, issn, titulo, autor, anio, abstract, journal, publisher, tipo, database
-        )
         if identificador not in identificadores:
             # Agregar al set de identificadores
             identificadores.add(identificador)
 
             # Crear un objeto de tipo Publication y añadirlo a unified_data
-            #pub = publication(
-            #    doi, isbn, issn, titulo, autor, anio, abstract, journal, publisher, tipo, database
-            #)
-            publicaciones_unificadas.append(pub)
+            pub = publication(
+                doi, isbn, issn, titulo, autor, anio, abstract, journal, publisher, tipo, database, pais, citaciones
+            )
+            sqlite_util.insertar_publicacion(pub)
         else:
-            publicaciones_repetidas_o_sin_identificador.append(pub)
             contador = contador + 1
 
-def imprimir_publicaciones_por_base_de_datos(base_datos):
-    publicaciones_filtradas = [pub for pub in publicaciones_unificadas if pub.database == base_datos]
-    if publicaciones_filtradas:
-        for pub in publicaciones_filtradas:
-            print(f"Título: {pub.title}")
-            print(f"Autor Principal: {pub.first_author}")
-            print(f"Año: {pub.year}")
-            print(f"Journal: {pub.journal}")
-            print(f"Publisher: {pub.publisher}")
-            print(f"Tipo: {pub.type}")
-            print(f"DOI: {pub.doi}")
-            print(f"ISBN: {pub.isbn}")
-            print(f"ISSN: {pub.issn}")
-            print(f"Base de Datos: {pub.database}")
-            print("-" * 40)
-    else:
-        print(f"No se encontraron publicaciones para la base de datos '{base_datos}'.")
 
-def unificar_publicaciones():
+def obtener_publicaciones_unificadas():
     ruta_data = '../../data/'
     return leer_archivos(ruta_data)
+
+
 if __name__ == '__main__':
-    #ruta_data = '../../data/'
-    #leer_archivos(ruta_data)
-    publicaciones = unificar_publicaciones()
-    print("cantidad publicaciones filtradas: ", len(publicaciones))
+    publicaciones = obtener_publicaciones_unificadas()
+    csv_util.guardar_publicaciones_csv(publicaciones, "publications.csv")
+
+    print("cantidad publicaciones filtradas: ", len(identificadores))
     print("Cantidad publicaciones sin un posible identificador o repetidas", contador)

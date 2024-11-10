@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos Estadísticos</title>
+    <!-- Importar Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .container h1, .container p {
+            color: #343a40;
+        }
+        .container .row {
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+
+    <!-- Coloca este script antes de cerrar el body -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.card img').click(function() {
+                let src = $(this).attr('src'); // Obtiene el src de la imagen clicada
+                $('#modalImage').attr('src', src); // Asigna el src al modal
+                $('#graficoModal').modal('show'); // Muestra el modal
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<!-- Header -->
+
+<div class="container my-4">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Inicio</a></li>
+            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link active" aria-current="page">Datos bibliométricos</a></li>
+            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de ordenamiento</a></li>
+        </ul>
+    </header>
+</div>
+
+<!-- Inside -->
+
+<div class="container text-center">
+    <h1 class="my-4">Datos del análisis de datos bibliométricos</h1>
+    <p>En esta sección encontrarás estadísticas obtenidas del análisis bibliométrico, incluyendo la cantidad de artículos publicados, palabras más frecuentes en los resúmenes y las relaciones entre países, artículos y journals.</p>
+
+    <!-- Gráficos en Tarjetas -->
+    <div class="row">
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Autores Más Frecuentes</div>
+                <div class="card-body">
+                    <p class="card-text">Los 15 autores con más artículos publicados, ordenados de menor a mayor.</p>
+                    <img src="{{ url_for('static', filename='images/autores_frecuentes.png') }}" alt="Gráfico 1" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Bases de Datos</div>
+                <div class="card-body">
+                    <p class="card-text">Bases de datos con mayor cantidad de artículos publicados.</p>
+                    <img src="{{ url_for('static', filename='images/bds_frecuentes.png') }}" alt="Gráfico 2" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Publicaciones por Año</div>
+                <div class="card-body">
+                    <p class="card-text">Cantidad de artículos publicados en los últimos 12 años.</p>
+                    <img src="{{ url_for('static', filename='images/publicaciones_anio.png') }}" alt="Gráfico 3" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Journals Frecuentes</div>
+                <div class="card-body">
+                    <p class="card-text">Journals con mayor cantidad de artículos publicados.</p>
+                    <img src="{{ url_for('static', filename='images/journals_frecuentes.png') }}" alt="Gráfico 4" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Publishers Frecuentes</div>
+                <div class="card-body">
+                    <p class="card-text">Publishers con mayor cantidad de artículos publicados.</p>
+                    <img src="{{ url_for('static', filename='images/publishers_frecuentes.png') }}" alt="Gráfico 5" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tipos de Publicación</div>
+                <div class="card-body">
+                    <p class="card-text">Tipos de publicaciones más frecuentes.</p>
+                    <img src="{{ url_for('static', filename='images/tipo_publicaciones_frecuentes.png') }}" alt="Gráfico 6" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Categorías Frecuentes</div>
+                <div class="card-body">
+                    <p class="card-text">Categorías más frecuentes en los artículos analizados.</p>
+                    <img src="{{ url_for('static', filename='images/frecuencia_categoria.png') }}" alt="Gráfico 7" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Nube de Palabras</div>
+                <div class="card-body">
+                    <p class="card-text">Palabras más mencionadas en los resúmenes de los artículos.</p>
+                    <img src="{{ url_for('static', filename='images/nube_palabras.png') }}" alt="Gráfico 8" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Relación Artículos, Países y Journals</div>
+                <div class="card-body">
+                    <p class="card-text">Grafo de relaciones entre los artículos, países y journals.</p>
+                    <img src="{{ url_for('static', filename='images/relacion_journal_articulos_paises.png') }}" alt="Gráfico 9" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para agrandar la imagen -->
+<div class="modal fade" id="graficoModal" tabindex="-1" role="dialog" aria-labelledby="graficoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="graficoModalLabel">Gráfico detallado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" id="modalImage" class="img-fluid" alt="Gráfico ampliado">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+
+<div class="container footer">
+    <footer class="py-4 mt-4 text-center border-top">
+        <p>Universidad del Quindío, 2024</p>
+        <p>Realizado por: Sebastián Jaramillo Cardona y Juan Camilo Cortés Dávila</p>
+    </footer>
+</div>
+
+</body>
+</html>

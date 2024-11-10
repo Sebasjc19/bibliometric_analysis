@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráficos Estadísticos</title>
+    <!-- Importar Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .container h1, .container p {
+            color: #343a40;
+        }
+        .container .row {
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.card img').click(function() {
+                let src = $(this).attr('src'); // Obtiene el src de la imagen clicada
+                $('#modalImage').attr('src', src); // Asigna el src al modal
+                $('#graficoModal').modal('show'); // Muestra el modal
+            });
+        });
+    </script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container my-4">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Inicio</a></li>
+            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link text-white" >Datos bibliométricos</a></li>
+            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link active" aria-current="page">Métodos de ordenamiento</a></li>
+        </ul>
+    </header>
+</div>
+
+<!-- Contenido Principal -->
+<div class="container text-center">
+    <h1 class="my-4">Gráficas de tiempo de ordenamiento de {{ cantidad_registros }} registros</h1>
+    <p>En esta sección encontrarás estadísticas obtenidas del ordenamiento de distintas variables bibliométricas como el titulo, el año, entre otras.</p>
+
+    <!-- Gráficos en Tarjetas -->
+    <div class="row">
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tiempo de ordenamiento por año</div>
+                <div class="card-body">
+                    <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por año.</p>
+                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_anio.png') }}" alt="Gráfico 1" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tiempo de ordenamiento por título</div>
+                <div class="card-body">
+                    <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por título.</p>
+                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_titulo.png') }}" alt="Gráfico 2" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tiempo de ordenamiento por primer autor</div>
+                <div class="card-body">
+                    <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por primer autor.</p>
+                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_primer_autor.png') }}" alt="Gráfico 3" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tiempo de ordenamiento por publisher</div>
+                <div class="card-body">
+                    <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por publisher.</p>
+                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_publisher.png') }}" alt="Gráfico 4" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 my-3">
+            <div class="card">
+                <div class="card-header">Tiempo de ordenamiento por Journal</div>
+                <div class="card-body">
+                    <p class="card-text">Gráfico de tiempo de ejecución de los métodos ordenamiento por journal.</p>
+                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_journal.png') }}" alt="Gráfico 5" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agrandar la imagen -->
+<div class="modal fade" id="graficoModal" tabindex="-1" role="dialog" aria-labelledby="graficoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="graficoModalLabel">Gráfico detallado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" id="modalImage" class="img-fluid" alt="Gráfico ampliado">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="container footer">
+    <footer class="py-4 mt-4 text-center border-top">
+        <p>Universidad del Quindío, 2024</p>
+        <p>Realizado por: Sebastián Jaramillo Cardona y Juan Camilo Cortés Dávila</p>
+    </footer>
+</div>
+
+
+</body>
+</html>

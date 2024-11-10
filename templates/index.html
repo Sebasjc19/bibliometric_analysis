@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráficos Estadísticos</title>
+    <!-- Importar Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container header {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .container h1, .container p {
+            color: #343a40;
+        }
+        .container .row {
+            margin-bottom: 1.5rem;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container my-4">
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link active" aria-current="page">Inicio</a></li>
+            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link text-white" >Datos bibliométricos</a></li>
+            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de ordenamiento</a></li>
+        </ul>
+    </header>
+</div>
+
+
+<div class="container text-center">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1>Presentación proyecto</h1>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Footer -->
+<div class="container footer">
+    <footer class="py-4 mt-4 text-center border-top">
+        <p>Universidad del Quindío, 2024</p>
+        <p>Realizado por: Sebastián Jaramillo Cardona y Juan Camilo Cortés Dávila</p>
+    </footer>
+</div>
+
+
+
+
+
+</body>
+</html>
