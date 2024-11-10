@@ -3,7 +3,7 @@ import csv
 
 def guardar_publicaciones_csv(publications, filename):
     # Nombres de las columnas para el archivo CSV
-    fieldnames = ['doi', 'isbn', 'issn', 'title', 'first_author', 'year', 'abstract', 'journal', 'publisher', 'type', 'database']
+    fieldnames = ['doi', 'isbn', 'issn', 'title', 'first_author', 'year', 'abstract', 'journal', 'publisher', 'type', 'database', 'country', 'citations']
 
     # Abrir el archivo en modo de escritura
     with open("../../results/"+filename, mode='w', newline='', encoding='utf-8') as file:

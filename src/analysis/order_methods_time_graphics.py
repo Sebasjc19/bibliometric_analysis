@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
 import os
+
 from src.analysis.order_methods.binary_insertion_sort import obtener_tiempo_ordenamiento as biinsoobtior
 from src.analysis.order_methods.bitonic_sort import obtener_tiempo_ordenamiento as bisoimobtior
 from src.analysis.order_methods.bucket_sort import obtener_tiempo_ordenamiento as busorobtior
@@ -12,9 +12,7 @@ from src.analysis.order_methods.radix_sort import obtener_tiempo_ordenamiento as
 from src.analysis.order_methods.selection_sort import obtener_tiempo_ordenamiento as sesoobtior
 from src.analysis.order_methods.tim_sort import obtener_tiempo_ordenamiento as tisoobtior
 from src.analysis.order_methods.tree_sort import obtener_tiempo_ordenamiento as trsoobtior
-from src.analysis import data_unification
 from src.utils import graphics_util, sqlite_util
-
 
 ruta_imagenes = os.path.join(os.path.dirname(__file__), '../../static/images')
 
@@ -61,7 +59,7 @@ def graficar_tiempo_ordenamiento_por_llave(llave, titulo, ruta_guardado):
         print(f"{algoritmo}: {tiempo} segundos")
 
     # Graficar los tiempos
-    graphics_util.graficar_tiempos_ejecucion(tiempos_ejecucion, titulo, ruta_guardado)
+    graphics_util.realizar_graficos(tiempos_ejecucion, titulo,"Algoritmos de ordenamiento","Tiempo de ejecución (segundos)", "barra", ruta_guardado)
 
 def graficar_tiempo_ejecucion_anio():
     llave = lambda publicacion: publicacion.year

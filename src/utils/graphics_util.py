@@ -1,22 +1,11 @@
-import re
-from collections import Counter
-
+import matplotlib.pyplot as plt
 import networkx as nx
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt
+
 from src.utils import sqlite_util
 
 
 def realizar_graficos(datos, titulo, xlabel, ylabel, tipo_grafico, ruta_guardado):
-    """
-    Función para crear gráficos de barras o líneas.
-
-    :param datos: Datos a graficar (lista de tuplas o diccionario).
-    :param titulo: Título del gráfico.
-    :param xlabel: Etiqueta del eje X.
-    :param ylabel: Etiqueta del eje Y.
-    :param tipo_grafico: Tipo de gráfico a mostrar ('barra' o 'linea').
-    """
     # Verificar el tipo de datos y extraer datos x y y
     if isinstance(datos, dict):
         categorias = list(datos.keys())
@@ -48,54 +37,15 @@ def realizar_graficos(datos, titulo, xlabel, ylabel, tipo_grafico, ruta_guardado
     #plt.show()
 
 
-def generar_nube_palabras(abstracts, keywords, ruta_guardado):
-    # Paso 1: Obtener los abstracts de la base de datos
-    abstracts = [pub[0] for pub in abstracts]
+def generar_nube_palabras(frecuencias, ruta_guardado):
 
-    # Paso 2: Contar la frecuencia de palabras clave
-    palabras_clave = [clave for categoria in keywords.values() for clave in categoria]
-    frecuencias = Counter()
-
-    for abstract in abstracts:
-        # Convertir a minúsculas y eliminar caracteres no deseados
-        texto = abstract.lower()
-        texto = re.sub(r'[^a-záéíóúñü\s]', '', texto)
-
-        # Contar la frecuencia de palabras clave
-        for palabra in palabras_clave:
-            if palabra.lower() in texto:
-                frecuencias[palabra] += 1
-
-    # Paso 3: Crear la nube de palabras
     nube_palabras = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(frecuencias)
 
-    # Paso 4: Mostrar la nube de palabras
     plt.figure(figsize=(10, 5))
     plt.imshow(nube_palabras, interpolation='bilinear')
     plt.axis('off')  # Ocultar los ejes
     plt.title('Nube de Palabras de Palabras Clave')
     plt.savefig(ruta_guardado)
-    #plt.show()
-
-def graficar_tiempos_ejecucion(tiempos_ejecucion, titulo, ruta_guardado):
-    # Extraer nombres y tiempos
-    nombres_algoritmos = list(tiempos_ejecucion.keys())
-    tiempos = list(tiempos_ejecucion.values())
-
-    # Crear un gráfico de barras
-    plt.bar(nombres_algoritmos, tiempos)
-
-    # Añadir etiquetas y título
-    plt.xlabel('Algoritmos de Ordenamiento')
-    plt.ylabel('Tiempo de Ejecución (s)')
-    plt.title(titulo)
-    plt.xticks(rotation=45, ha="right")  # Rotar las etiquetas del eje X
-    plt.tight_layout()  # Ajustar el diseño para que las etiquetas no se corten
-
-    plt.savefig(ruta_guardado)
-    plt.clf()
-    # Mostrar el gráfico
-    #plt.show()
 
 def generar_grafo(journals):
     G = nx.Graph()

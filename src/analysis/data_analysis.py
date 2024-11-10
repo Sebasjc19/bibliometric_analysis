@@ -1,8 +1,7 @@
-from collections import defaultdict
+import re
+from collections import defaultdict, Counter
 
 from src.utils import sqlite_util
-from src.model import publication
-import re
 
 keywords = {
     "Habilidades": [
@@ -60,7 +59,6 @@ def obtener_frecuencia_categoria_variable():
     # Crear un diccionario para almacenar la frecuencia de cada palabra en cada categoría
     frecuencia = {categoria: defaultdict(int) for categoria in keywords.keys()}
 
-    # Supongamos que tienes una lista de abstracts
     abstracts = [pub[0].lower() for pub in sqlite_util.obtener_abstracts()]
 
     # Contar las palabras clave en los abstracts
@@ -86,6 +84,21 @@ def obtener_frecuencia_categoria():
 
     return total_apariciones
 
+def obtener_frecuencia_palabras():
+    #Obtener los abstracts de la base de datos
+    abstracts = [pub[0] for pub in sqlite_util.obtener_abstracts()]
 
-if __name__ == '__main__':
-    print(obtener_frecuencia_categoria_variable())
+    #Contar la frecuencia de palabras clave
+    palabras_clave = [clave for categoria in keywords.values() for clave in categoria]
+    frecuencias = Counter()
+
+    for abstract in abstracts:
+        # Convertir a minúsculas y eliminar caracteres no deseados
+        texto = abstract.lower()
+        texto = re.sub(r'[^a-záéíóúñü\s]', '', texto)
+
+        # Contar la frecuencia de palabras clave
+        for palabra in palabras_clave:
+            if palabra.lower() in texto:
+                frecuencias[palabra] += 1
+    return frecuencias

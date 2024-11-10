@@ -10,17 +10,21 @@
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
+
         .container header {
             background-color: #007bff;
             color: white;
             border-radius: 5px;
         }
+
         .container h1, .container p {
             color: #343a40;
         }
+
         .container .row {
             margin-bottom: 1.5rem;
         }
+
         .footer {
             background-color: #f8f9fa;
             color: #6c757d;
@@ -33,23 +37,85 @@
 <div class="container my-4">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link active" aria-current="page">Inicio</a></li>
-            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link text-white" >Datos bibliométricos</a></li>
-            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de ordenamiento</a></li>
+            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link active" aria-current="page">Inicio</a>
+            </li>
+            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link text-white">Datos
+                bibliométricos</a></li>
+            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de
+                ordenamiento</a></li>
         </ul>
     </header>
 </div>
 
-
+<!-- Introduction Section -->
 <div class="container text-center">
     <div class="row align-items-center">
         <div class="col">
-            <h1>Presentación proyecto</h1>
+            <h1>Análisis bibliométrico sobre "Computational Thinking"</h1>
+            <p>Este proyecto explora la producción científica en torno al pensamiento computacional, organizando y
+                visualizando datos extraídos de más de 14,000 publicaciones.</p>
         </div>
     </div>
 </div>
 
+<!-- Análisis Bibliométrico Section -->
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3 class="section-title">1. Fuentes de Datos</h3>
+            <p>Después de una extensa búsqueda de 20 bases de datos, se ha seleccionado 6 de ella como ACM, IEEE, Sage,
+                ScienceDirect, Scopus y Taylor & Francis. Cada publicación se identificó y unificó utilizando claves
+                únicas como DOI, ISBN e ISSN, garantizando una base de datos libre de duplicados.</p>
 
+            <h3 class="section-title">2. Variables Analizadas</h3>
+            <ul>
+                <li><strong>DOI, ISBN, ISSN:</strong> identificadores únicos para evitar duplicados.</li>
+                <li><strong>DOI, journal y país:</strong> información clave sobre la relación entre las publicaciones
+                    con mas citaciones, el journal y el país de afiliación.
+                </li>
+                <li><strong>Titulo, primer autor, año, journal, publisher, tipo de publicación y base de datos:</strong>
+                    variables necesarias para analizar la cantidad de articulos según estas variables o ser ordenadas
+                    mediante métodos de ordenamiento.
+                </li>
+                <li><strong>Abstract, categorías y palabras clave:</strong> se analizaron categorías como "Habilidades",
+                    "Herramientas", entre otras, extrayendo palabras clave y sinónimos de los abstracts.
+                </li>
+            </ul>
+
+            <h3 class="section-title">3. Herramientas Utilizadas</h3>
+            <ul>
+                <ul>
+                    <li><strong>Python 3.12</strong>: versión más reciente del lenguaje de programación Python,
+                        utilizada para desarrollar el proyecto y ejecutar el código.
+                    </li>
+                    <li><strong>Pandas</strong>: librería de Python especializada en la manipulación y análisis de
+                        datos, ideal para trabajar con estructuras como DataFrames y Series.
+                    </li>
+                    <li><strong>Bibtexparser</strong>: librería en Python para analizar archivos BibTeX, permitiendo
+                        extraer y trabajar con metadatos de publicaciones académicas.
+                    </li>
+                    <li><strong>Sqlite3</strong>: base de datos relacional ligera integrada en Python, utilizada para
+                        almacenar y gestionar los datos del proyecto de forma eficiente.
+                    </li>
+                    <li><strong>Matplotlib</strong>: librería para la creación de gráficos estáticos, animados e
+                        interactivos, utilizada para visualizar los resultados del análisis bibliométrico.
+                    </li>
+                    <li><strong>Networkx</strong>: librería para la creación, manipulación y estudio de la estructura,
+                        dinámica y funciones de redes complejas, utilizada para crear grafos de relaciones entre
+                        publicaciones, journals, y país.
+                    </li>
+                    <li><strong>Flask</strong>: framework web ligero para Python, utilizado para desarrollar la interfaz
+                        web del proyecto y mostrar las visualizaciones de los análisis bibliométricos.
+                    </li>
+                </ul>
+
+            </ul>
+
+            <h3 class="section-title">4. Instrucciones</h3>
+            <p>En el inicio de la página se encontrará una barra de navegación con 3 opciones, <strong>inicio</strong> siendo esta pagina. En <strong>datos bibliométricos</strong> se encontrará los resultados del analisis de las publicaciones cientificas, como cantidad de publicaciones según una variable en especifica, palabras más frecuentes, etc. En <strong>métodos de ordenamiento</strong> se encontrarán graficas que representan el tiempo de ejecución de ordenamiento de todas las publicaciones cientificas según diversos métodos existentes en la actualidad.</p>
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 <div class="container footer">
@@ -58,9 +124,6 @@
         <p>Realizado por: Sebastián Jaramillo Cardona y Juan Camilo Cortés Dávila</p>
     </footer>
 </div>
-
-
-
 
 
 </body>

@@ -29,7 +29,6 @@ def leer_archivos(carpeta_base):
 def procesar_archivos_bibtex(ruta_completa, carpeta_raiz):
     global contador
     bibtex_df = bibtex_util.leer_bibtex(ruta_completa)
-    # Mostrar las columnas del DataFrame
 
     database = carpeta_raiz.split("/")[-1] #base de datos
 
@@ -78,6 +77,3 @@ def obtener_publicaciones_unificadas():
 if __name__ == '__main__':
     publicaciones = obtener_publicaciones_unificadas()
     csv_util.guardar_publicaciones_csv(publicaciones, "publications.csv")
-
-    print("cantidad publicaciones filtradas: ", len(identificadores))
-    print("Cantidad publicaciones sin un posible identificador o repetidas", contador)

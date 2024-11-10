@@ -53,7 +53,7 @@ def datos_bibliometricos():
                                     "Apariciones", "barra", "static/images/frecuencia_categoria.png")
 
     #Nube de palabras
-    graphics_util.generar_nube_palabras(sqlite_util.obtener_abstracts(), data_analysis.keywords, "static/images/nube_palabras.png")
+    graphics_util.generar_nube_palabras(data_analysis.obtener_frecuencia_palabras(), "static/images/nube_palabras.png")
 
     #Grafo
     graphics_util.dibujar_grafo(sqlite_util.obtener_journals_top_10(), "static/images/relacion_journal_articulos_paises.png" )
@@ -66,6 +66,7 @@ def metodos_ordenamiento():
     cantidad_registros = sqlite_util.obtener_cantidad_publicaciones()
     print(cantidad_registros)
 
+
     order_methods_time_graphics.graficar_tiempo_ejecucion_anio()
     order_methods_time_graphics.graficar_tiempo_ejecucion_publisher()
     order_methods_time_graphics.graficar_tiempo_ejecucion_primer_autor()
@@ -73,10 +74,6 @@ def metodos_ordenamiento():
     order_methods_time_graphics.graficar_tiempo_ejecucion_titulo()
 
     return render_template('metodos_ordenamiento.html', cantidad_registros=cantidad_registros)
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
