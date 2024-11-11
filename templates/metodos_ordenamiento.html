@@ -45,6 +45,20 @@
                 $('#graficoModal').modal('show'); // Muestra el modal
             });
         });
+
+        function generarImagen(imagenTipo) {
+            fetch(`/generar_imagen/${imagenTipo}`, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Recarga la página para mostrar la imagen generada
+                    } else {
+                        alert('No se pudo generar la imagen.');
+                    }
+                });
+        }
     </script>
 </head>
 <body>
@@ -65,14 +79,17 @@
     <h1 class="my-4">Gráficas de tiempo de ordenamiento de {{ cantidad_registros }} registros</h1>
     <p>En esta sección encontrarás estadísticas obtenidas del ordenamiento de distintas variables bibliométricas como el titulo, el año, entre otras.</p>
 
-    <!-- Gráficos en Tarjetas -->
+    <!-- -->
     <div class="row">
         <div class="col-md-6 col-lg-4 my-3">
             <div class="card">
                 <div class="card-header">Tiempo de ordenamiento por año</div>
                 <div class="card-body">
                     <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por año.</p>
-                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_anio.png') }}" alt="Gráfico 1" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                    {% if images_exist.tiempo_ejecucion_ordenamiento_anio %}
+                        <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_anio.png') }}" alt="Gráfico autores" class="img-fluid">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tiempo_ejecucion_ordenamiento_anio')">Volver a generar</button>
                 </div>
             </div>
         </div>
@@ -82,7 +99,10 @@
                 <div class="card-header">Tiempo de ordenamiento por título</div>
                 <div class="card-body">
                     <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por título.</p>
-                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_titulo.png') }}" alt="Gráfico 2" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                    {% if images_exist.tiempo_ejecucion_ordenamiento_titulo %}
+                        <img src="{{ url_for('static', filename='images/tiempo_ejecucion_ordenamiento_titulo.png') }}" alt="Gráfico autores" class="img-fluid">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tiempo_ejecucion_ordenamiento_titulo')">Volver a generar</button>
                 </div>
             </div>
         </div>
@@ -92,7 +112,10 @@
                 <div class="card-header">Tiempo de ordenamiento por primer autor</div>
                 <div class="card-body">
                     <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por primer autor.</p>
-                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_primer_autor.png') }}" alt="Gráfico 3" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                    {% if images_exist.tiempo_ejecucion_primer_autor %}
+                        <img src="{{ url_for('static', filename='images/tiempo_ejecucion_primer_autor.png') }}" alt="Gráfico autores" class="img-fluid">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tiempo_ejecucion_primer_autor')">Volver a generar</button>
                 </div>
             </div>
         </div>
@@ -102,7 +125,10 @@
                 <div class="card-header">Tiempo de ordenamiento por publisher</div>
                 <div class="card-body">
                     <p class="card-text">Gráfico de tiempo de ejecución de los métodos de ordenamiento por publisher.</p>
-                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_publisher.png') }}" alt="Gráfico 4" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                    {% if images_exist.tiempo_ejecucion_publisher %}
+                        <img src="{{ url_for('static', filename='images/tiempo_ejecucion_publisher.png') }}" alt="Gráfico autores" class="img-fluid">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tiempo_ejecucion_publisher')">Volver a generar</button>
                 </div>
             </div>
         </div>
@@ -112,7 +138,10 @@
                 <div class="card-header">Tiempo de ordenamiento por Journal</div>
                 <div class="card-body">
                     <p class="card-text">Gráfico de tiempo de ejecución de los métodos ordenamiento por journal.</p>
-                    <img src="{{ url_for('static', filename='images/tiempo_ejecucion_journal.png') }}" alt="Gráfico 5" class="img-thumbnail" data-toggle="modal" data-target="#graficoModal">
+                    {% if images_exist.tiempo_ejecucion_journal %}
+                        <img src="{{ url_for('static', filename='images/tiempo_ejecucion_journal.png') }}" alt="Gráfico autores" class="img-fluid">
+                    {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tiempo_ejecucion_journal')">Volver a generar</button>
                 </div>
             </div>
         </div>

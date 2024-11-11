@@ -11,26 +11,32 @@
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
         }
+
         .container header {
             background-color: #007bff;
             color: white;
             border-radius: 5px;
         }
+
         .container h1, .container p {
             color: #343a40;
         }
+
         .container .row {
             margin-bottom: 1.5rem;
         }
+
         .card {
             border: 1px solid #dee2e6;
             border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .card-header {
             background-color: #e9ecef;
             font-weight: bold;
         }
+
         .footer {
             background-color: #f8f9fa;
             color: #6c757d;
@@ -41,13 +47,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.card img').click(function() {
+        $(document).ready(function () {
+            $('.card img').click(function () {
                 let src = $(this).attr('src'); // Obtiene el src de la imagen clicada
                 $('#modalImage').attr('src', src); // Asigna el src al modal
                 $('#graficoModal').modal('show'); // Muestra el modal
             });
         });
+
+        function generarImagen(imagenTipo) {
+            fetch(`/generar_imagen/${imagenTipo}`, {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); // Recarga la página para mostrar la imagen generada
+                    } else {
+                        alert('No se pudo generar la imagen.');
+                    }
+                });
+        }
     </script>
 
 </head>
@@ -59,115 +79,152 @@
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Inicio</a></li>
-            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link active" aria-current="page">Datos bibliométricos</a></li>
-            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de ordenamiento</a></li>
+            <li class="nav-item"><a href="{{ url_for('datos_bibliometricos') }}" class="nav-link active"
+                                    aria-current="page">Datos bibliométricos</a></li>
+            <li class="nav-item"><a href="{{ url_for('metodos_ordenamiento') }}" class="nav-link text-white">Métodos de
+                ordenamiento</a></li>
         </ul>
     </header>
 </div>
+
 
 <!-- Inside -->
 
 <div class="container text-center">
     <h1 class="my-4">Datos del análisis de datos bibliométricos</h1>
-    <p>En esta sección encontrarás estadísticas obtenidas del análisis bibliométrico, incluyendo la cantidad de artículos publicados, palabras más frecuentes en los resúmenes y las relaciones entre países, artículos y journals.</p>
+    <p>En esta sección encontrarás estadísticas obtenidas del análisis bibliométrico, incluyendo la cantidad de
+        artículos publicados, palabras más frecuentes en los resúmenes y las relaciones entre países, artículos y
+        journals.</p>
 
     <!-- Gráficos en Tarjetas -->
     <div class="row">
         <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Autores Más Frecuentes</div>
-                <div class="card-body">
-                    <p class="card-text">Los 15 autores con más artículos publicados, ordenados de menor a mayor.</p>
-                    <img src="{{ url_for('static', filename='images/autores_frecuentes.png') }}" alt="Gráfico 1" class="img-fluid">
-                </div>
+        <div class="card">
+            <div class="card-header">Autores Más Frecuentes</div>
+            <div class="card-body">
+                <p class="card-text">Los 15 autores con más artículos publicados, ordenados de menor a mayor.</p>
+                {% if images_exist.autores_frecuentes %}
+                    <img src="{{ url_for('static', filename='images/autores_frecuentes.png') }}" alt="Gráfico autores" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('autores_frecuentes')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Bases de Datos</div>
-                <div class="card-body">
-                    <p class="card-text">Bases de datos con mayor cantidad de artículos publicados.</p>
-                    <img src="{{ url_for('static', filename='images/bds_frecuentes.png') }}" alt="Gráfico 2" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Bases de datos</div>
+            <div class="card-body">
+                <p class="card-text">Bases de datos con mayor cantidad de artículos publicados.</p>
+                {% if images_exist.bds_frecuentes %}
+                    <img src="{{ url_for('static', filename='images/bds_frecuentes.png') }}" alt="Gráfico bases de datos" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('bds_frecuentes')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Publicaciones por Año</div>
-                <div class="card-body">
-                    <p class="card-text">Cantidad de artículos publicados en los últimos 12 años.</p>
-                    <img src="{{ url_for('static', filename='images/publicaciones_anio.png') }}" alt="Gráfico 3" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Publicaciones por año</div>
+            <div class="card-body">
+                <p class="card-text">Cantidad de artículos publicados en los últimos 12 años.</p>
+                {% if images_exist.publicaciones_anio %}
+                    <img src="{{ url_for('static', filename='images/publicaciones_anio.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('publicaciones_anio')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Journals Frecuentes</div>
-                <div class="card-body">
-                    <p class="card-text">Journals con mayor cantidad de artículos publicados.</p>
-                    <img src="{{ url_for('static', filename='images/journals_frecuentes.png') }}" alt="Gráfico 4" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Journals Frecuentes</div>
+            <div class="card-body">
+                <p class="card-text">Journals con mayor cantidad de artículos publicados.</p>
+                {% if images_exist.journals_frecuentes %}
+                    <img src="{{ url_for('static', filename='images/journals_frecuentes.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('journals_frecuentes')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Publishers Frecuentes</div>
-                <div class="card-body">
-                    <p class="card-text">Publishers con mayor cantidad de artículos publicados.</p>
-                    <img src="{{ url_for('static', filename='images/publishers_frecuentes.png') }}" alt="Gráfico 5" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Publishers frecuentes</div>
+            <div class="card-body">
+                <p class="card-text">Publishers con mayor cantidad de artículos publicados.</p>
+                {% if images_exist.publishers_frecuentes %}
+                    <img src="{{ url_for('static', filename='images/publishers_frecuentes.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('publishers_frecuentes')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Tipos de Publicación</div>
-                <div class="card-body">
-                    <p class="card-text">Tipos de publicaciones más frecuentes.</p>
-                    <img src="{{ url_for('static', filename='images/tipo_publicaciones_frecuentes.png') }}" alt="Gráfico 6" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Tipos de Publicación</div>
+            <div class="card-body">
+                <p class="card-text">Tipos de publicaciones más frecuentes.</p>
+                {% if images_exist.tipo_publicaciones_frecuentes %}
+                    <img src="{{ url_for('static', filename='images/tipo_publicaciones_frecuentes.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('tipo_publicaciones_frecuentes')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Categorías Frecuentes</div>
-                <div class="card-body">
-                    <p class="card-text">Categorías más frecuentes en los artículos analizados.</p>
-                    <img src="{{ url_for('static', filename='images/frecuencia_categoria.png') }}" alt="Gráfico 7" class="img-fluid">
-                </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Categorías Frecuentes</div>
+            <div class="card-body">
+                <p class="card-text">Categorías más frecuentes en los artículos analizados.</p>
+                {% if images_exist.frecuencia_categoria %}
+                    <img src="{{ url_for('static', filename='images/frecuencia_categoria.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('frecuencia_categoria')">Volver a generar</button>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Nube de Palabras</div>
-                <div class="card-body">
-                    <p class="card-text">Palabras más mencionadas en los resúmenes de los artículos.</p>
-                    <img src="{{ url_for('static', filename='images/nube_palabras.png') }}" alt="Gráfico 8" class="img-fluid">
-                </div>
-            </div>
-        </div>
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Nube de Palabras</div>
+            <div class="card-body">
+                <p class="card-text">Palabras más mencionadas en los resúmenes de los artículos.</p>
+                {% if images_exist.nube_palabras %}
+                    <img src="{{ url_for('static', filename='images/nube_palabras.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('nube_palabras')">Volver a generar</button>
 
-        <div class="col-md-6 col-lg-4 my-3">
-            <div class="card">
-                <div class="card-header">Relación Artículos, Países y Journals</div>
-                <div class="card-body">
-                    <p class="card-text">Grafo de relaciones entre los artículos, países y journals.</p>
-                    <img src="{{ url_for('static', filename='images/relacion_journal_articulos_paises.png') }}" alt="Gráfico 9" class="img-fluid">
-                </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 my-3">
+        <div class="card">
+            <div class="card-header">Relación Artículos, Países y Journals</div>
+            <div class="card-body">
+                <p class="card-text">Grafo de relaciones entre los artículos, países y journals.</p>
+                {% if images_exist.relacion_journal_articulos_paises %}
+                    <img src="{{ url_for('static', filename='images/relacion_journal_articulos_paises.png') }}" alt="Gráfico anios" class="img-fluid">
+                {% endif %}
+                    <button class="btn btn-primary" onclick="generarImagen('relacion_journal_articulos_paises')">Volver a generar</button>
+            </div>
+        </div>
+    </div>
+
+
+
     </div>
 </div>
 
 
 <!-- Modal para agrandar la imagen -->
-<div class="modal fade" id="graficoModal" tabindex="-1" role="dialog" aria-labelledby="graficoModalLabel" aria-hidden="true">
+<div class="modal fade" id="graficoModal" tabindex="-1" role="dialog" aria-labelledby="graficoModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
